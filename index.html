@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car & Form</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div class="title">Cars</div></br>
+
+    <table>
+        <tr>
+            <th>Car Name:</th>
+            <th>Car Img:</th>
+            <th>Car price:</th>
+            <th>Car Website:</th>
+        </tr>
+        <tr>
+            <td>Audi</td>
+            <td><img src="https://images.pexels.com/photos/12086936/pexels-photo-12086936.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Audi"></td>
+            <td>20000$</td>
+            <td><a href="https://www.audi.com" target="_blank">Audi Website</a></td>
+        </tr>
+        <tr>
+            <td>Mercedes</td>
+            <td><img src="https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?" alt="Mercedes"></td>
+            <td>40000$</td>
+            <td><a href="https://www.mercedes-benz.com" target="_blank">Mercedes Website</a></td>
+        </tr>
+        <tr>
+            <td>BMW</td>
+            <td><img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="BMW"></td>
+            <td>20000$</td>
+            <td><a href="https://www.bmw.com" target="_blank">BMW Website</a></td>
+        </tr>
+    </table>
+
+    <form method="post">
+        <fieldset>
+            <legend>Enter your data</legend>
+    
+            <label for="name">Name:</label> 
+            <input type="text" id="name" name="name" required>
+    
+            <label for="email">Email:</label> 
+            <input type="email" id="email" name="email" required>
+    
+            <label for="password">Password:</label> 
+            <input type="password" id="password" name="password" required>
+    
+            <label for="dob">Date of Birth:</label> 
+            <input type="date" id="dob" name="dob" required>
+    
+            <input type="submit" value="Submit">
+        </fieldset>
+    </form>
+    
+</body>
+</html>
