@@ -1,62 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car & Form</title>
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Car & Form</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* اختياري: تحسين بسيط لعرض قسم الذكاء */
+    #ai-comparison { margin-top: 24px; padding: 16px; border: 1px solid #ddd; border-radius: 8px; }
+    #ai-comparison h2 { margin: 0 0 8px; font-size: 1.2rem; }
+    #ai-summary { margin: 8px 0; }
+    #ai-ranking { margin: 8px 0 0 18px; }
+  </style>
 </head>
 <body>
 
-    <div class="title">Cars</div></br>
+  <div class="title">Cars</div><br/>
 
-    <table>
-        <tr>
-            <th>Car Name:</th>
-            <th>Car Img:</th>
-            <th>Car price:</th>
-            <th>Car Website:</th>
-        </tr>
-        <tr>
-            <td>Audi</td>
-            <td><img src="https://images.pexels.com/photos/12086936/pexels-photo-12086936.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Audi"></td>
-            <td>20000$</td>
-            <td><a href="https://www.audi.com" target="_blank">Audi Website</a></td>
-        </tr>
-        <tr>
-            <td>Mercedes</td>
-            <td><img src="https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?" alt="Mercedes"></td>
-            <td>40000$</td>
-            <td><a href="https://www.mercedes-benz.com" target="_blank">Mercedes Website</a></td>
-        </tr>
-        <tr>
-            <td>BMW</td>
-            <td><img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="BMW"></td>
-            <td>20000$</td>
-            <td><a href="https://www.bmw.com" target="_blank">BMW Website</a></td>
-        </tr>
-    </table>
+  <table>
+    <tr>
+      <th>Car Name:</th>
+      <th>Car Img:</th>
+      <th>Car price:</th>
+      <th>Car Website:</th>
+    </tr>
+    <tr>
+      <td>Audi</td>
+      <td><img src="https://images.pexels.com/photos/12086936/pexels-photo-12086936.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Audi"></td>
+      <td>20000$</td>
+      <td><a href="https://www.audi.com" target="_blank">Audi Website</a></td>
+    </tr>
+    <tr>
+      <td>Mercedes</td>
+      <td><img src="https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?" alt="Mercedes"></td>
+      <td>40000$</td>
+      <td><a href="https://www.mercedes-benz.com" target="_blank">Mercedes Website</a></td>
+    </tr>
+    <tr>
+      <td>BMW</td>
+      <td><img src="https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg" alt="BMW"></td>
+      <td>20000$</td>
+      <td><a href="https://www.bmw.com" target="_blank">BMW Website</a></td>
+    </tr>
+  </table>
 
-    <form method="post">
-        <fieldset>
-            <legend>Enter your data</legend>
-    
-            <label for="name">Name:</label> 
-            <input type="text" id="name" name="name" required>
-    
-            <label for="email">Email:</label> 
-            <input type="email" id="email" name="email" required>
-    
-            <label for="password">Password:</label> 
-            <input type="password" id="password" name="password" required>
-    
-            <label for="dob">Date of Birth:</label> 
-            <input type="date" id="dob" name="dob" required>
-    
-            <input type="submit" value="Submit">
-        </fieldset>
-    </form>
-    
+  <form method="post">
+    <fieldset>
+      <legend>Enter your data</legend>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" id="dob" name="dob" required>
+
+      <input type="submit" value="Submit">
+    </fieldset>
+  </form>
+
+  <!-- الإضافة: قسم المقارنة الذكية -->
+  <section id="ai-comparison">
+    <h2>مقارنة ذكية بين السيارات (AI)</h2>
+    <div id="ai-summary">... جاري التحميل ...</div>
+    <ol id="ai-ranking"></ol>
+    <div id="ai-tips"></div>
+  </section>
+
+  <!-- سكربت يجلب ناتج الذكاء من ملف ثابت يولّده GitHub Actions -->
+  <script>
+  (async function(){
+    try {
+      const res = await fetch("./ai/comparison.json", { cache: "no-store" });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+
+      // summary
+      document.getElementById("ai-summary").textContent =
+        data.summary || "لم يتم توليد ملخص بعد.";
+
+      // ranking
+      const list = document.getElementById("ai-ranking");
+      (data.ranking || []).forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = `${item.name} — سبب: ${item.reason}`;
+        list.appendChild(li);
+      });
+
+      // tips
+      if (data.tips) {
+        const tips = document.getElementById("ai-tips");
+        const p = document.createElement("p");
+        p.textContent = "نصائح: " + data.tips;
+        tips.appendChild(p);
+      }
+    } catch (e) {
+      console.error(e);
+      document.getElementById("ai-summary").textContent = "تعذّر تحميل مقارنة AI.";
+    }
+  })();
+  </script>
+
 </body>
 </html>
