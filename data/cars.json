@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Audi",
+    "price": 20000,
+    "img": "https://images.pexels.com/photos/12086936/pexels-photo-12086936.jpeg?auto=compress&cs=tinysrgb&w=600",
+    "url": "https://www.audi.com"
+  },
+  {
+    "name": "Mercedes",
+    "price": 40000,
+    "img": "https://images.pexels.com/photos/136872/pexels-photo-136872.jpeg?",
+    "url": "https://www.mercedes-benz.com"
+  },
+  {
+    "name": "BMW",
+    "price": 20000,
+    "img": "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg",
+    "url": "https://www.bmw.com"
+  }
+]
